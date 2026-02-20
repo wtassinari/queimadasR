@@ -1,4 +1,4 @@
-url: https://seu-usuario.github.io/queimadasR/
+url: https://wtassinari.github.io/queimadasR/
 
 template:
   bootstrap: 5
@@ -16,7 +16,7 @@ navbar:
       href: news/index.html
   right:
     - icon: fa-github
-      href: https://github.com/seu-usuario/queimadasR
+      href: https://github.com/wtassinari/queimadasR
 
 reference:
   - title: "Main Functions"

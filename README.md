@@ -11,7 +11,7 @@ Você pode instalar o pacote diretamente do GitHub:
 install.packages("remotes")
 
 # Instalar o pacote queimadasR
-remotes::install_github("seu-usuario/queimadasR")
+remotes::install_github("wtassinari/queimadasR")
 ```
 
 Ou, para desenvolvimento local:

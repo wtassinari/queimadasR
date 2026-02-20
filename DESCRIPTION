@@ -18,5 +18,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-URL: https://github.com/seu-usuario/queimadasR
-BugReports: https://github.com/seu-usuario/queimadasR/issues
+URL: https://github.com/wtassinari/queimadasR
+BugReports: https://github.com/wtassinari/queimadasR/issues
