@@ -22,10 +22,11 @@ Os dados são oficiais e públicos, fornecidos pelo Instituto Nacional de Pesqui
 #### Via GitHub
 
 ```r
-# Se necessário
-# install.packages("remotes")
+# Instalar remotes (se necessário)
+install.packages("remotes")
 
-remotes::install_github("wtassinari/queimadasR")
+# Reinstalar o pacote (agora com a documentação)
+remotes::install_github("wtassinari/queimadasR", force = TRUE)
 ```
 
 #### Instalação local (arquivo .tar.gz)
