@@ -1,0 +1,145 @@
+---
+title: "Guia Rápido do Pacote queimadasR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Guia Rápido}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introdução
+
+O pacote `queimadasR` fornece uma interface simples e poderosa para baixar dados de queimadas do Banco de Dados de Queimadas (BDQUEIMADAS) do Instituto Nacional de Pesquisas Espaciais (INPE).
+
+## Instalação
+
+```r
+# Instalar do GitHub
+remotes::install_github("seu-usuario/queimadasR")
+```
+
+## Uso Básico
+
+```{r setup, eval=FALSE}
+library(queimadasR)
+
+# Baixar dados de queimadas para a região Norte em agosto-setembro de 2023
+estados_norte <- c("ACRE", "AMAPÁ", "AMAZONAS", "PARÁ", "RONDÔNIA", "RORAIMA", "TOCANTINS")
+
+dados <- download_focos_anual_periodo(
+  data_inicio_str = "01/08/2023",
+  data_fim_str = "30/09/2023",
+  estados_alvo = estados_norte
+)
+```
+
+## Entendendo os Parâmetros
+
+A função `download_focos_anual_periodo()` aceita os seguintes parâmetros principais:
+
+**Parâmetros obrigatórios:**
+
+- `data_inicio_str`: Data de início em formato "DD/MM/AAAA"
+- `data_fim_str`: Data de fim em formato "DD/MM/AAAA"
+
+**Parâmetros opcionais:**
+
+- `estados_alvo`: Vetor com nomes dos estados (ex: c("ACRE", "AMAZONAS"))
+- `satelites_alvo`: Vetor com nomes dos satélites (ex: c("GOES-16", "AQUA_T"))
+- `deduplicar_final`: Se TRUE, remove registros duplicados (padrão: TRUE)
+- `timeout`: Tempo máximo de espera em segundos (padrão: 300)
+
+## Exemplos Práticos
+
+### Exemplo 1: Baixar dados para um estado
+
+```r
+dados_acre <- download_focos_anual_periodo(
+  data_inicio_str = "01/01/2023",
+  data_fim_str = "31/12/2023",
+  estados_alvo = "ACRE"
+)
+
+head(dados_acre)
+```
+
+### Exemplo 2: Filtrar por satélites específicos
+
+```r
+dados_goes <- download_focos_anual_periodo(
+  data_inicio_str = "01/08/2023",
+  data_fim_str = "31/08/2023",
+  satelites_alvo = c("GOES-16", "AQUA_T")
+)
+
+table(dados_goes$satelite)
+```
+
+### Exemplo 3: Análise de série temporal
+
+```r
+dados_serie <- download_focos_anual_periodo(
+  data_inicio_str = "01/01/2020",
+  data_fim_str = "31/12/2023"
+)
+
+# Contar focos por ano
+dados_serie$ano <- as.numeric(format(dados_serie$data_pas, "%Y"))
+focos_por_ano <- table(dados_serie$ano)
+plot(focos_por_ano, type = "b", main = "Série Temporal de Focos")
+```
+
+## Estrutura dos Dados Retornados
+
+Os dados retornados são um data frame com as seguintes colunas principais:
+
+| Coluna | Descrição |
+|--------|-----------|
+| `latitude` | Latitude do foco de queimada |
+| `longitude` | Longitude do foco de queimada |
+| `data_pas` | Data e hora (GMT) da passagem do satélite |
+| `municipio` | Município onde o foco foi detectado |
+| `estado` | Estado onde o foco foi detectado |
+| `satelite` | Satélite que detectou o foco |
+| `bioma` | Bioma onde o foco foi detectado |
+| `ano_ref` | Ano de referência do download |
+
+## Tratamento de Erros
+
+O pacote implementa validação automática de parâmetros:
+
+```r
+# Isto resultará em erro: formato de data inválido
+tryCatch({
+  download_focos_anual_periodo(
+    data_inicio_str = "01-08-2023",  # Formato inválido
+    data_fim_str = "31/08/2023"
+  )
+}, error = function(e) {
+  cat("Erro:", conditionMessage(e), "\n")
+})
+```
+
+## Dicas e Boas Práticas
+
+1. **Timeouts**: Para períodos longos ou conexões lentas, aumente o valor de `timeout`
+2. **Deduplicação**: Mantenha `deduplicar_final = TRUE` para garantir dados limpos
+3. **Satélites**: Use `satelites_alvo = NULL` para incluir todos os satélites disponíveis
+4. **Memória**: Para períodos muito longos, considere fazer downloads em chunks
+
+## Próximos Passos
+
+Explore os exemplos completos no arquivo `examples.R` do pacote para análises mais avançadas, incluindo visualizações e análises geoespaciais.
+
+## Referências
+
+- INPE: https://www.inpe.br/
+- TerraBrasilis: https://terrabrasilis.dpi.inpe.br/
+- BDQUEIMADAS: https://terrabrasilis.dpi.inpe.br/queimadas/bdqueimadas/

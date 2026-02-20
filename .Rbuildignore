@@ -1,0 +1,15 @@
+^\.github$
+^\.gitignore$
+^\.Rproj\.user$
+^.*\.Rproj$
+^README\.md$
+^NEWS\.md$
+^CONTRIBUTING\.md$
+^LICENSE\.md$
+^cran-comments\.md$
+^_pkgdown\.yml$
+^docs$
+^\.DS_Store$
+^\.vscode$
+^\.idea$
+^\.Rhistory$

@@ -1,0 +1,22 @@
+Package: queimadasR
+Title: Download e Análise de Dados de Queimadas do INPE
+Version: 0.1.0
+Authors@R: 
+    person("Seu", "Nome", email = "seu.email@example.com", role = c("aut", "cre"))
+Description: Pacote para download e processamento de dados diários de queimadas
+    do Banco de Dados de Queimadas (BDQUEIMADAS) do Instituto Nacional de 
+    Pesquisas Espaciais (INPE). Permite filtrar dados por período, estados 
+    e satélites, com deduplicação automática de registros.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports:
+    utils
+Suggests:
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+URL: https://github.com/seu-usuario/queimadasR
+BugReports: https://github.com/seu-usuario/queimadasR/issues
