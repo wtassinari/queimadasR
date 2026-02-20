@@ -25,7 +25,7 @@ Os dados são oficiais e públicos, fornecidos pelo Instituto Nacional de Pesqui
 # Instalar remotes (se necessário)
 install.packages("remotes")
 
-# Reinstalar o pacote (agora com a documentação)
+# Instalar o pacote 
 remotes::install_github("wtassinari/queimadasR", force = TRUE)
 ```
 
