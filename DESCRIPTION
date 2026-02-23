@@ -12,20 +12,24 @@ Authors@R: c(
     person("Manuela dos Santos", "Ferreira", 
            role = "aut")
   )
-Description: Ferramentas para download e análise de dados de queimadas do INPE.
+Description: Pacote para download e processamento de dados de queimadas
+    do Banco de Dados de Queimadas (BDQUEIMADAS) do Instituto Nacional de
+    Pesquisas Espaciais (INPE). Permite filtrar dados por período, estados
+    e satélites, com deduplicação automática de registros.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: false
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
 Depends:
     R (>= 3.5.0)
 Imports:
-    httr,
-    jsonlite,
-    dplyr,
-    lubridate
+    utils
 Suggests:
     ggplot2,
+    testthat (>= 3.0.0),
     knitr,
     rmarkdown
+VignetteBuilder: knitr
 URL: https://github.com/wtassinari/queimadasR
 BugReports: https://github.com/wtassinari/queimadasR/issues
