@@ -52,12 +52,13 @@ library(queimadasR)
 
 estados_norte <- c("ACRE", "AMAPÁ", "AMAZONAS")
 
-dados_norte <- download_focos_anual_periodo(
-  data_inicio_str = "15/08/2023",
-  data_fim_str    = "30/09/2023",
-  estados_alvo    = estados_norte,
-  satelites_alvo  = NULL,   # Todos os satélites
-  timeout         = 300,
+library(queimadasR)
+
+dados_filtrados <- download_focos_anual_periodo(
+  data_inicio_str = "15/08/2022",
+  data_fim_str = "30/09/2022",
+  estados_alvo = c("MATO GROSSO", "TOCANTINS"),
+  satelites_alvo = c("GOES-16", "AQUA_T"),
   deduplicar_final = TRUE
 )
 
