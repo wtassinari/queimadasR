@@ -50,18 +50,24 @@ Exemplo simples:
 ```r
 library(queimadasR)
 
+# Especificando os estados
+estados <- c("MATO GROSSO", "TOCANTINS", "ACRE", "AMAPÁ")
+
+# Especificando os satélites
+# satelites <- c("GOES-16", "AQUA_T") 
+satelites <- NULL # São todos os satélites 
+
+
 tabela <- download_focos_anual_periodo(
-  data_inicio_str = "15/08/2022",
-  data_fim_str = "16/08/2022",
-  estados_alvo = c("MATO GROSSO", "TOCANTINS"),
-  satelites_alvo = c("GOES-16", "AQUA_T"),
+  data_inicio_str = "15/08/2025",
+  data_fim_str = "16/08/2025",
+  estados_alvo = estados,
+  satelites_alvo = satelites,  # Todos os satélite
   deduplicar_final = TRUE
 )
 
 head(tabela)
 summary(tabela)
-nrow(tabela)
-
 ```
 
 ## 📊 Estrutura dos dados:
