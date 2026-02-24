@@ -50,21 +50,17 @@ Exemplo simples:
 ```r
 library(queimadasR)
 
-estados_norte <- c("ACRE", "AMAPÁ", "AMAZONAS")
-
-library(queimadasR)
-
-dados_filtrados <- download_focos_anual_periodo(
+tabela <- download_focos_anual_periodo(
   data_inicio_str = "15/08/2022",
-  data_fim_str = "30/09/2022",
+  data_fim_str = "16/08/2022",
   estados_alvo = c("MATO GROSSO", "TOCANTINS"),
   satelites_alvo = c("GOES-16", "AQUA_T"),
   deduplicar_final = TRUE
 )
 
-head(dados_norte)
-summary(dados_norte)
-nrow(dados_norte)
+head(tabela)
+summary(tabela)
+nrow(tabela)
 
 ```
 
