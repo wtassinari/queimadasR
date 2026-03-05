@@ -182,13 +182,14 @@ TASSINARI, Wagner S.; PACIFICO, Roni dos Santos Jorge; FERREIRA, Manuela dos San
 ### Formato BibTeX
 
 ```bibtex
-@manual{queimadasR2024,
+@software{queimadasR2024,
   title = {queimadasR: Pacote para download e análise de dados de queimadas do INPE},
   author = {Tassinari, Wagner S. and Pacifico, Roni dos Santos Jorge and Ferreira, Manuela dos Santos},
-  year = {2024},
-  note = {Versão 0.1.0},
   organization = {Universidade Federal Rural do Rio de Janeiro e Instituto Nacional de Infectologia/FIOCRUZ},
-  url = {https://github.com/wtassinari/queimadasR}
+  year = {2024},
+  version   = {0.1.0},
+  doi       = {10.5281/zenodo.18879882},
+  url       = {https://doi.org/10.5281/zenodo.18879882}
 }
 ```
 
