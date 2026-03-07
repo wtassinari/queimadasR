@@ -1,68 +1,68 @@
 # queimadasR <img src="sticker_queimadasR.png" align="right" height="138" />
 
-O pacote permite acessar diretamente dados do sistema BDQueimadas, incluindo:
+The package allows direct access to data from the BDQueimadas system, including:
 
-- 🔥 Focos de calor
+- 🔥 Heat spots
 
-- 🌡️ Índice de risco de fogo
+- 🌡️ Fire risk index
 
-- 🌧️ Variáveis meteorológicas associadas
+- 🌧️ Associated meteorological variables
 
-- 🌎 Informações espaciais (UF, município, bioma)
+- 🌎 Spatial information (state, municipality, biome)
 
 - ⚡ FRP (Fire Radiative Power)
 
-Os dados são oficiais e públicos, fornecidos pelo Instituto Nacional de Pesquisas Espaciais por meio do Programa Queimadas.
+The data are official and public, provided by the National Institute for Space Research through the Queimadas Program.
 
-🔗 Para saber mais sobre o Programa de Queimadas do INPE, [acesse o portal](https://queimadas.dgi.inpe.br/queimadas/portal).
+🔗 To learn more about INPE's Queimadas Program, [visit the portal](https://queimadas.dgi.inpe.br/queimadas/portal).
 
 
-## 📦 Instalação
+## 📦 Installation
 
 #### Via GitHub
 
 ```r
-# Instalar remotes (se necessário)
+# Install remotes (if necessary)
 install.packages("remotes")
 
-# Instalar o pacote 
+# Install the package
 remotes::install_github("wtassinari/queimadasR", force = TRUE)
 ```
 
-#### Instalação local (arquivo .tar.gz)
+#### Local installation (.tar.gz file)
 
 ```r
 install.packages("queimadasR_0.1.0.tar.gz", repos = NULL, type = "source")
 ```
 
-## 🚀 Fluxo básico de uso
+## 🚀 Basic usage flow
 
-O fluxo geral do pacote envolve:
+The general workflow of the package involves:
 
-1. Definir período e filtros (estado, satélite, etc.)
+1. Define the period and filters (state, satellite, etc.)
 
-2. Baixar os dados
+2. Download the data
 
-3. Realizar análises exploratórias ou modelagens
+3. Perform exploratory analyses or modelling
 
-Exemplo simples:
+Simple example:
 
 ```r
 library(queimadasR)
 
-# Especificando os estados
+# Specifying the states
 estados <- c("MATO GROSSO", "TOCANTINS", "ACRE", "AMAPÁ")
 
-# Especificando os satélites
+# Specifying the satellites
 # satelites <- c("GOES-16", "AQUA_T") 
-satelites <- NULL # São todos os satélites 
+satelites <- NULL # All satellites
 
 
 tabela <- download_focos_anual_periodo(
   data_inicio_str = "15/08/2025",
   data_fim_str = "16/08/2025",
   estados_alvo = estados,
-  satelites_alvo = satelites,  # Todos os satélite
+  satelites_alvo = satelites,  # All satellites
   deduplicar_final = TRUE
 )
 
@@ -70,123 +70,103 @@ head(tabela)
 summary(tabela)
 ```
 
-## 📊 Estrutura dos dados:
+## 📊 Data structure:
 
-A função `download_focos()` retorna um dataframe com as seguintes variáveis:
+The `download_focos()` function returns a dataframe with the following variables:
 
-| Variável | Tipo | Descrição |
-|----------|------|-----------|
-| `latitude` | num | Coordenada geográfica latitude do foco de calor (em graus decimais) |
-| `longitude` | num | Coordenada geográfica longitude do foco de calor (em graus decimais) |
-| `data_pas` | POSIXct | Data e hora da passagem do satélite (formato: AAAA-MM-DD HH:MM:SS) |
-| `satelite` | chr | Satélite que realizou a detecção (ex: AQUA_M-T, NOAA-20, NOAA-21, TERRA, etc.) |
-| `pais` | chr | País onde o foco foi detectado |
-| `estado` | chr | Unidade federativa (UF) onde o foco foi detectado |
-| `municipio` | chr | Nome do município onde o foco foi detectado |
-| `bioma` | chr | Bioma brasileiro onde o foco ocorreu (Amazônia, Cerrado, Mata Atlântica, Caatinga, Pampa, Pantanal) |
-| `numero_dias_sem_chuva` | num | Número de dias consecutivos sem precipitação na região |
-| `precipitacao` | num | Precipitação acumulada no período (em mm) |
-| `risco_fogo` | num | Índice de risco de fogo calculado pelo INPE (escala 0-1) |
-| `id_area_industrial` | int | Identificador de área industrial (0 = não industrial, 1 = industrial) |
-| `frp` | num | Fire Radiative Power - Potência Radiativa do Fogo (em MW) |
-| `ano_ref` | int | Ano de referência da detecção |
+| Variable | Type | Description |
+|----------|------|-------------|
+| `latitude` | num | Geographic latitude coordinate of the heat spot (in decimal degrees) |
+| `longitude` | num | Geographic longitude coordinate of the heat spot (in decimal degrees) |
+| `data_pas` | POSIXct | Date and time of the satellite pass (format: YYYY-MM-DD HH:MM:SS) |
+| `satelite` | chr | Satellite that performed the detection (e.g.: AQUA_M-T, NOAA-20, NOAA-21, TERRA, etc.) |
+| `pais` | chr | Country where the spot was detected |
+| `estado` | chr | Federative unit (state) where the spot was detected |
+| `municipio` | chr | Name of the municipality where the spot was detected |
+| `bioma` | chr | Brazilian biome where the spot occurred (Amazon, Cerrado, Atlantic Forest, Caatinga, Pampa, Pantanal) |
+| `numero_dias_sem_chuva` | num | Number of consecutive days without precipitation in the region |
+| `precipitacao` | num | Accumulated precipitation in the period (in mm) |
+| `risco_fogo` | num | Fire risk index calculated by INPE (scale 0–1) |
+| `id_area_industrial` | int | Industrial area identifier (0 = non-industrial, 1 = industrial) |
+| `frp` | num | Fire Radiative Power (in MW) |
+| `ano_ref` | int | Reference year of the detection |
 
-### Detalhamento das principais variáveis
+### Detailed description of the main variables
 
-**Coordenadas geográficas (`latitude`, `longitude`)**
-- Precisão: aproximadamente 1km (resolução dos satélites de referência)
-- Formato: graus decimais (ex: -9.30, -68.30)
+**Geographic coordinates (`latitude`, `longitude`)**
+- Precision: approximately 1 km (resolution of the reference satellites)
+- Format: decimal degrees (e.g.: -9.30, -68.30)
 
-**Satélites (`satelite`)**
-- **AQUA_M-T**: Satélite Aqua (Missão Manhã-Tarde) - referência principal
-- **TERRA_M-T**: Satélite Terra (Missão Manhã-Tarde)
-- **NOAA-20/21**: Satélites da série NOAA (National Oceanic and Atmospheric Administration)
-- **NPP-375**: Satélite Suomi NPP
+**Satellites (`satelite`)**
+- **AQUA_M-T**: Aqua satellite (Morning-Afternoon Mission) — primary reference
+- **TERRA_M-T**: Terra satellite (Morning-Afternoon Mission)
+- **NOAA-20/21**: NOAA series satellites (National Oceanic and Atmospheric Administration)
+- **NPP-375**: Suomi NPP satellite
 
-**Biomas brasileiros (`bioma`)**
-- Amazônia
+**Brazilian biomes (`bioma`)**
+- Amazon
 - Cerrado
-- Mata Atlântica
+- Atlantic Forest
 - Caatinga
 - Pampa
 - Pantanal
 
 **FRP (Fire Radiative Power)**
-- Mede a intensidade da queimada
-- Valores mais altos indicam focos mais intensos
-- Unidade: Megawatts (MW)
-- Útil para estimar emissões de gases e material particulado
+- Measures the intensity of the fire
+- Higher values indicate more intense spots
+- Unit: Megawatts (MW)
+- Useful for estimating gas and particulate matter emissions
 
-**Risco de fogo (`risco_fogo`)**
-- Índice calculado pelo INPE baseado em:
-  - Condições meteorológicas
-  - Umidade do solo
-  - Tipo de vegetação
-  - Histórico de queimadas
-- Escala: 0 (baixo risco) a 1 (alto risco)
+**Fire risk (`risco_fogo`)**
+- Index calculated by INPE based on:
+  - Meteorological conditions
+  - Soil moisture
+  - Vegetation type
+  - Fire history
+- Scale: 0 (low risk) to 1 (high risk)
 
-**Satélites**
-Exemplos incluídos na base:
+**Satellites**
+Examples included in the dataset:
 
 - AQUA_M-T
 - TERRA_M-T
 - NOAA-20 / NOAA-21
 - NPP-375
 
-### 📈 Exemplo de uso para visualização dos dados
+## 🎯 Applications
 
-```r
-library(queimadasR)
+The package can be used for:
 
-dados <- download_focos(
-  data_inicio = "2025-01-01",
-  data_fim    = "2025-01-31",
-  estado      = "AC"
-)
+- Environmental and ecological studies
+- Seasonal fire monitoring
+- Spatio-temporal modelling
+- Studies on the health impacts of wildfires
+- Integration with epidemiological databases
 
-str(dados)
+## 🙏 Acknowledgements
 
-summary(dados[, c("frp", "risco_fogo", "numero_dias_sem_chuva")])
+The development of this package would not have been possible without the open data freely provided by INPE's Queimadas Program and the work of the entire team involved in environmental monitoring in Brazil.
 
-table(dados$satelite)
+Special thanks to the National Institute for Space Research (INPE) for making the data available and for their essential work in monitoring wildfires and forest fires across Brazilian territory.
 
-aggregate(frp ~ bioma, data = dados, FUN = mean)
-```
+We recommend that users also cite the official data source in their scientific publications.
 
-## 🎯 Aplicações
+## 📚 How to cite the package:
 
-O pacote pode ser utilizado para:
+We ask users to cite the package whenever it is used in research or publications, acknowledging the work of all authors involved.
 
-- Estudos ambientais e ecológicos
-- Monitoramento sazonal de queimadas
-- Modelagem espaço-temporal
-- Estudos sobre impactos das queimadas na saúde
-- Integração com bases epidemiológicas
-
-## 🙏 Reconhecimento
-
-O desenvolvimento deste pacote não seria possível sem os dados abertos disponibilizados gratuitamente pelo Programa de Queimadas do INPE e o trabalho de toda equipe envolvida no monitoramento ambiental do Brasil.
-
-Agradecimento especial ao Instituto Nacional de Pesquisas Espaciais (INPE) pela disponibilização dos dados e pelo trabalho essencial no monitoramento de queimadas e incêndios florestais em território brasileiro.
-
-Recomendamos que os usuários também citem a fonte oficial dos dados em seus trabalhos científicos.
-
-## 📚 Como citar o pacote:
-
-Pedimos aos usuários que citem o pacote sempre que ele for utilizado em pesquisas ou publicações, reconhecendo o trabalho de todos os autores envolvidos.
-
-### Formato ABNT
+### ABNT Format
 
 TASSINARI, Wagner S.; PACIFICO, Roni dos Santos Jorge; FERREIRA, Manuela dos Santos. **queimadasR**: Pacote para download e análise de dados de queimadas do INPE. Versão 0.1.0. 2024. Disponível em: https://github.com/wtassinari/queimadasR
 
-### Formato BibTeX
+### BibTeX Format
 
 ```bibtex
-@software{queimadasR2024,
+@software{queimadasR2026,
   title = {queimadasR: Pacote para download e análise de dados de queimadas do INPE},
   author = {Tassinari, Wagner S. and Pacifico, Roni dos Santos Jorge and Ferreira, Manuela dos Santos},
   organization = {Universidade Federal Rural do Rio de Janeiro e Instituto Nacional de Infectologia/FIOCRUZ},
-  year = {2024},
+  year = {2026},
   version   = {0.1.0},
   doi       = {10.5281/zenodo.18879882},
   url       = {https://doi.org/10.5281/zenodo.18879882}
@@ -194,14 +174,14 @@ TASSINARI, Wagner S.; PACIFICO, Roni dos Santos Jorge; FERREIRA, Manuela dos San
 ```
 
 
-## 👨‍🔬 Um pouco mais sobre os autores: 
+## 👨‍🔬 A little more about the authors:
 
 <div align="justify">
 
-**Wagner S. Tassinari** Professor e pesquisador com atuação interdisciplinar entre estatística, ciência de dados, ciências ambientais, epidemiologia e saúde pública, com ênfase em modelagem espaço-temporal aplicada a queimadas e seus impactos. Lotado no Instituto de Ciências Exatas da Universidade Federal Rural do Rio de Janeiro (ICE/UFRRJ) e no Instituto Nacional de Infectologia da Fundação Oswaldo Cruz (INI/FIOCRUZ). Sua pesquisa integra métodos computacionais e estatísticos para análise de dados ambientais e de saúde pública, com ênfase em modelos espaciais e temporais aplicados ao monitoramento de queimadas e seus impactos na saúde.
+**Wagner S. Tassinari** is a professor and researcher with an interdisciplinary background spanning statistics, data science, environmental sciences, epidemiology, and public health, with an emphasis on spatio-temporal modelling applied to wildfires and their impacts. He is affiliated with the Institute of Exact Sciences at the Federal Rural University of Rio de Janeiro (ICE/UFRRJ) and the National Institute of Infectology at the Oswaldo Cruz Foundation (INI/FIOCRUZ). His research integrates computational and statistical methods for the analysis of environmental and public health data, with a focus on spatial and temporal models applied to wildfire monitoring and their health impacts.
 
-**Roni dos Santos Jorge Pacifico** é discente do curso de Engenharia Florestal, vinculado ao Instituto de Florestas da Universidade Federal Rural do Rio de Janeiro (IF/UFRRJ), onde desenvolve estudos sobre dinâmica do fogo, ecologia de ecossistemas florestais e impactos ambientais das queimadas. Sua expertise contribui para a compreensão dos padrões ecológicos e ambientais relacionados aos focos de calor.
+**Roni dos Santos Jorge Pacifico** is a student in the Forest Engineering programme, affiliated with the Institute of Forests at the Federal Rural University of Rio de Janeiro (IF/UFRRJ), where he conducts studies on fire dynamics, forest ecosystem ecology, and the environmental impacts of wildfires. His expertise contributes to the understanding of ecological and environmental patterns related to heat spots.
 
-**Manuela dos Santos Ferreira** é discente do curso de Sistemas de Informação no Instituto de Ciências Exatas da Universidade Federal Rural do Rio de Janeiro (ICE/UFRRJ), atuando no desenvolvimento de ferramentas computacionais e análise de dados para o monitoramento ambiental. Sua contribuição foi fundamental para a implementação e documentação do pacote.
+**Manuela dos Santos Ferreira** is a student in the Information Systems programme at the Institute of Exact Sciences of the Federal Rural University of Rio de Janeiro (ICE/UFRRJ), working on the development of computational tools and data analysis for environmental monitoring. Her contribution was fundamental to the implementation and documentation of the package.
 
 </div>
