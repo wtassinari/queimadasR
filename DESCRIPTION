@@ -1,7 +1,7 @@
 Package: queimadasR
 Type: Package
-Title: Download e Análise de Dados de Queimadas do INPE
-Version: 0.1.0
+Title: Download and Analysis of Wildfire Data from INPE
+Version: 0.2.0
 Authors@R: c(
     person("Wagner", "Tassinari", 
            email = "wagner.tassinari@ufrrj.br", 
@@ -12,21 +12,22 @@ Authors@R: c(
     person("Manuela dos Santos", "Ferreira", 
            role = "aut")
   )
-Description: Pacote para download e processamento de dados de queimadas
-    do Banco de Dados de Queimadas (BDQUEIMADAS) do Instituto Nacional de
-    Pesquisas Espaciais (INPE). Permite filtrar dados por período, estados
-    e satélites, com deduplicação automática de registros.
+Description: Package for downloading and processing wildfire data from the
+    Brazilian Wildfire Database (BDQUEIMADAS) of the National Institute for
+    Space Research (INPE). Allows filtering data by period, states, and
+    satellites, with automatic record deduplication. Provides functions for
+    data download, processing, and visualization of fire spot locations.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: false
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Depends:
     R (>= 3.5.0)
 Imports:
     utils
 Suggests:
-    ggplot2,
+    ggplot2 (>= 3.0.0),
     testthat (>= 3.0.0),
     knitr,
     rmarkdown

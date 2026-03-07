@@ -11,7 +11,7 @@
 
 
 
-<title>README_EN</title>
+<title>README</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -392,26 +392,107 @@ remotes::install_github(&quot;wtassinari/queimadasR&quot;, force = TRUE)</code><
 <li><p>Perform exploratory analyses or modelling</p></li>
 </ol>
 <p>Simple example:</p>
-<pre class="r"><code>library(queimadasR)
-
-# Specifying the states
-estados &lt;- c(&quot;MATO GROSSO&quot;, &quot;TOCANTINS&quot;, &quot;ACRE&quot;, &quot;AMAPÁ&quot;)
-
-# Specifying the satellites
-# satelites &lt;- c(&quot;GOES-16&quot;, &quot;AQUA_T&quot;) 
-satelites &lt;- NULL # All satellites
+<pre class="r"><code># -----------------------------------------------------------------------------
+# First, source this file to load the function into your R session:
+#   source(&quot;download_fire_spots.R&quot;)
+# -----------------------------------------------------------------------------
 
 
-tabela &lt;- download_focos_anual_periodo(
-  data_inicio_str = &quot;15/08/2025&quot;,
-  data_fim_str = &quot;16/08/2025&quot;,
-  estados_alvo = estados,
-  satelites_alvo = satelites,  # All satellites
-  deduplicar_final = TRUE
+# --- Example 1: All satellites, single month, entire Brazil ------------------
+# Downloads every fire spot detected across Brazil during September 2023,
+# using all available satellites, with deduplication enabled.
+
+df_brazil &lt;- download_fire_spots(
+  start_date_str    = &quot;01/09/2023&quot;,
+  end_date_str      = &quot;30/09/2023&quot;,
+  deduplicate_final = TRUE
 )
 
-head(tabela)
-summary(tabela)</code></pre>
+head(df_brazil)
+nrow(df_brazil)
+
+
+# --- Example 2: Northern region, peak fire season, all satellites ------------
+# Covers the 7 states of Brazil&#39;s Legal Amazon during the Aug–Sep 2023
+# fire season. Deduplication removes records shared across satellite passes.
+
+north_states &lt;- c(&quot;ACRE&quot;, &quot;AMAPA&quot;, &quot;AMAZONAS&quot;, &quot;PARA&quot;,
+                  &quot;RONDONIA&quot;, &quot;RORAIMA&quot;, &quot;TOCANTINS&quot;)
+
+df_north &lt;- download_fire_spots(
+  start_date_str    = &quot;01/08/2023&quot;,
+  end_date_str      = &quot;2/08/2023&quot;,
+  target_states     = north_states,
+  deduplicate_final = TRUE
+)
+
+head(df_north)
+table(df_north$estado)  # fire spots per state
+
+
+# --- Example 3: Specific satellites, two states, single year -----------------
+# Useful when you only want data from GOES-16 (geostationary) and
+# AQUA_T (polar orbit) for a targeted area.
+
+df_goes_aqua &lt;- download_fire_spots(
+  start_date_str    = &quot;15/08/2022&quot;,
+  end_date_str      = &quot;30/09/2022&quot;,
+  target_states     = c(&quot;MATO GROSSO&quot;, &quot;TOCANTINS&quot;),
+  target_satellites = c(&quot;GOES-16&quot;, &quot;AQUA_T&quot;),
+  deduplicate_final = TRUE
+)
+
+table(df_goes_aqua$satelite)  # confirm which satellites are present
+
+
+# --- Example 4: Multi-year download (2020–2022), single state ----------------
+# The function automatically loops over each year and combines the results.
+# Increase timeout if your connection is slow.
+
+df_multiyear &lt;- download_fire_spots(
+  start_date_str    = &quot;01/07/2020&quot;,
+  end_date_str      = &quot;31/10/2022&quot;,
+  target_states     = c(&quot;MATO GROSSO&quot;),
+  deduplicate_final = TRUE,
+  timeout           = 600   # 10 minutes per year
+)
+
+# Count fire spots per year
+table(df_multiyear$ref_year)
+
+
+# --- Example 5: No deduplication, custom dedup keys, inspect satellites ------
+# Download without deduplication so you can inspect the raw data first,
+# then manually deduplicate using only lat/lon/datetime.
+
+df_raw &lt;- download_fire_spots(
+  start_date_str             = &quot;01/09/2024&quot;,
+  end_date_str               = &quot;30/09/2024&quot;,
+  target_states              = c(&quot;PARA&quot;, &quot;MARANHAO&quot;),
+  deduplicate_final          = FALSE,
+  show_satellites_when_empty = TRUE
+)
+
+# Check which satellites are present before deciding how to deduplicate
+sort(table(df_raw$satelite), decreasing = TRUE)
+
+# Manually deduplicate using only coordinates + datetime
+df_deduped &lt;- df_raw[!duplicated(df_raw[, c(&quot;latitude&quot;, &quot;longitude&quot;, &quot;data_pas&quot;)]), ]
+nrow(df_raw) - nrow(df_deduped)  # how many duplicates were removed
+
+
+# --- Example 6: Save results to CSV ------------------------------------------
+
+df_to_save &lt;- download_fire_spots(
+  start_date_str    = &quot;01/08/2023&quot;,
+  end_date_str      = &quot;31/08/2023&quot;,
+  target_states     = c(&quot;AMAZONAS&quot;, &quot;PARA&quot;),
+  deduplicate_final = TRUE
+)
+
+write.csv(df_to_save, &quot;fire_spots_AM_PA_aug2023.csv&quot;, row.names = FALSE)
+cat(&quot;File saved:&quot;, nrow(df_to_save), &quot;records\n&quot;)
+</code></pre>
 </div>
 <div id="data-structure" class="section level2">
 <h2>📊 Data structure:</h2>
