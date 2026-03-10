@@ -14,7 +14,7 @@ The package allows direct access to data from the BDQueimadas system, including:
 
 The data are official and public, provided by the National Institute for Space Research through the Queimadas Program.
 
-🔗 To learn more about INPE's Queimadas Program, [visit the portal](https://queimadas.dgi.inpe.br/queimadas/portal).
+🔗 To learn more about INPE's Queimadas Program, [visit the portal](https://terrabrasilis.dpi.inpe.br/queimadas/bdqueimadas/).
 
 
 ## 📦 Installation
