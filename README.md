@@ -239,7 +239,7 @@ We ask users to cite the package whenever it is used in research or publications
 
 ### ABNT Format
 
-TASSINARI, Wagner S.; PACIFICO, Roni dos Santos Jorge; FERREIRA, Manuela dos Santos; OLIVEIRA, Liliane de Fátima Antônio; HOKERBERG, Yara Hahr Marques; OLIVEIRA, Raquel de Vasconcellos Carvalhaes.
+TASSINARI, Wagner S.; PACIFICO, Roni dos Santos Jorge; FERREIRA, Manuela dos Santos; OLIVEIRA, Liliane de Fátima Antônio; HOKERBERG, Yara Hahr Marques; SANTOS, Heloísa Ferreira Pinto and SAUCHA, Camylla Veloso Valença; OLIVEIRA, Raquel de Vasconcellos Carvalhaes.
 
 ### Description
 . **queimadasR**: Pacote para download e análise de dados de queimadas do INPE. Versão 0.1.0. 2024. Disponível em: https://github.com/wtassinari/queimadasR
@@ -249,7 +249,7 @@ TASSINARI, Wagner S.; PACIFICO, Roni dos Santos Jorge; FERREIRA, Manuela dos San
 ```bibtex
 @software{queimadasR2026,
   title = {queimadasR: Pacote para download e análise de dados de queimadas do INPE},
-  author = {TASSINARI, Wagner S. and PACIFICO, Roni dos Santos Jorge and FERREIRA, Manuela dos Santos and OLIVEIRA, Liliane de Fátima Antônio and HOKERBERG, Yara Hahr Marques and OLIVEIRA, Raquel de Vasconcellos Carvalhaes},
+  author = {TASSINARI, Wagner S. and PACIFICO, Roni dos Santos Jorge and FERREIRA, Manuela dos Santos and OLIVEIRA, Liliane de Fátima Antônio and HOKERBERG, Yara Hahr Marques and SANTOS, Heloísa Ferreira Pinto and SAUCHA, Camylla Veloso Valença and OLIVEIRA, Raquel de Vasconcellos Carvalhaes},
   organization = {Universidade Federal Rural do Rio de Janeiro e Instituto Nacional de Infectologia/FIOCRUZ},
   year = {2026},
   version   = {0.2.0},
