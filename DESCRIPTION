@@ -8,25 +8,25 @@ Authors@R: c(
            role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-3799-1261")),
     person("Roni", "Pacifico",
-           role = c("aut", "cre"),
+           role = "aut",
            comment = c(ORCID = "0009-0005-9594-7049")),
     person("Manuela", "Ferreira",
-           role = c("aut", "cre"),
+           role = "aut",
            comment = c(ORCID = "0009-0002-6601-6489")),
     person("Liliane", "Oliveira",
-           role = c("aut", "cre"),
+           role = "aut",
            comment = c(ORCID = "0000-0002-2714-7139")),
     person("Yara", "Hokerberg",
-           role = c("aut", "cre"),
+           role = "aut",
            comment = c(ORCID = "0000-0001-7140-7172")),
     person("Heloisa", "Santos",
-           role = c("aut", "cre"),
+           role = "aut",
            comment = c(ORCID = "0000-0002-6353-9172")),
     person("Camylla", "Saucha",
-           role = c("aut", "cre"),
+           role = "aut",
            comment = c(ORCID = "0009-0007-9457-8768")),
     person("Raquel", "Oliveira",
-           role = c("aut", "cre"),
+           role = "aut",
            comment = c(ORCID = "0000-0001-9387-8645"))
   )
 Description: Package for downloading and processing wildfire data from the
@@ -51,3 +51,4 @@ Suggests:
 VignetteBuilder: knitr
 URL: https://github.com/wtassinari/queimadasR
 BugReports: https://github.com/wtassinari/queimadasR/issues
+
