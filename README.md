@@ -239,24 +239,27 @@ We ask users to cite the package whenever it is used in research or publications
 
 ### ABNT Format
 
-TASSINARI, Wagner S.; PACIFICO, Roni dos Santos Jorge; FERREIRA, Manuela dos Santos. **queimadasR**: Pacote para download e análise de dados de queimadas do INPE. Versão 0.1.0. 2024. Disponível em: https://github.com/wtassinari/queimadasR
+TASSINARI, Wagner S.; PACIFICO, Roni dos Santos Jorge; FERREIRA, Manuela dos Santos; OLIVEIRA, Liliane de Fátima Antônio; HOKERBERG, Yara Hahr Marques; OLIVEIRA, Raquel de Vasconcellos Carvalhaes.
+
+### Description
+. **queimadasR**: Pacote para download e análise de dados de queimadas do INPE. Versão 0.1.0. 2024. Disponível em: https://github.com/wtassinari/queimadasR
 
 ### BibTeX Format
 
 ```bibtex
 @software{queimadasR2026,
   title = {queimadasR: Pacote para download e análise de dados de queimadas do INPE},
-  author = {Tassinari, Wagner S. and Pacifico, Roni dos Santos Jorge and Ferreira, Manuela dos Santos},
+  author = {TASSINARI, Wagner S. and PACIFICO, Roni dos Santos Jorge and FERREIRA, Manuela dos Santos and OLIVEIRA, Liliane de Fátima Antônio and HOKERBERG, Yara Hahr Marques and OLIVEIRA, Raquel de Vasconcellos Carvalhaes},
   organization = {Universidade Federal Rural do Rio de Janeiro e Instituto Nacional de Infectologia/FIOCRUZ},
   year = {2026},
-  version   = {0.1.0},
+  version   = {0.2.0},
   doi       = {10.5281/zenodo.18879882},
   url       = {https://doi.org/10.5281/zenodo.18879882}
 }
 ```
 
 
-## 👨‍🔬 A little more about the authors:
+<!-- ## 👨‍🔬 A little more about the authors:
 
 <div align="justify">
 
@@ -266,4 +269,4 @@ TASSINARI, Wagner S.; PACIFICO, Roni dos Santos Jorge; FERREIRA, Manuela dos San
 
 **Manuela dos Santos Ferreira** is a student in the Information Systems programme at the Institute of Exact Sciences of the Federal Rural University of Rio de Janeiro (ICE/UFRRJ), working on the development of computational tools and data analysis for environmental monitoring. Her contribution was fundamental to the implementation and documentation of the package.
 
-</div>
+</div> -->
