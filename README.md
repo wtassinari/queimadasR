@@ -19,7 +19,7 @@ The data are official and public, provided by the National Institute for Space R
 
 ## 📦 Installation
 
-#### Via GitHub
+#### Via GitHubhttps://zenodo.org/records/18905267
 
 ```r
 # Install remotes (if necessary)
@@ -53,6 +53,7 @@ Simple example:
 #   source("download_fire_spots.R")
 # -----------------------------------------------------------------------------
 
+library(queimadasR)
 
 # --- Example 1: All satellites, single month, entire Brazil ------------------
 # Downloads every fire spot detected across Brazil during September 2023,
