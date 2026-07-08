@@ -239,7 +239,7 @@ We ask users to cite the package whenever it is used in research or publications
 
 ### ABNT Format
 
-TASSINARI, Wagner S.; PACIFICO, Roni dos Santos Jorge; FERREIRA, Manuela dos Santos; OLIVEIRA, Liliane de Fátima Antônio; HOKERBERG, Yara Hahr Marques; SANTOS, Heloísa Ferreira Pinto and SAUCHA, Camylla Veloso Valença; OLIVEIRA, Raquel de Vasconcellos Carvalhaes.
+TASSINARI, Wagner S.; PACIFICO, Roni dos Santos Jorge; FERREIRA, Manuela dos Santos; OLIVEIRA, Liliane de Fátima Antônio; HOKERBERG, Yara Hahr Marques; SANTOS, Heloísa Ferreira Pinto; SAUCHA, Camylla Veloso Valença; OLIVEIRA, Raquel de Vasconcellos Carvalhaes. queimadasR: pacote para download e análise de dados de queimadas do INPE. Versão 0.2.0. 2026. Software. DOI: 10.5281/zenodo.18879882. Disponível em: https://doi.org/10.5281/zenodo.18879882. Acesso em: 8 jul. 2026.
 
 ### Description
 . **queimadasR**: Pacote para download e análise de dados de queimadas do INPE. Versão 0.1.0. 2024. Disponível em: https://github.com/wtassinari/queimadasR
