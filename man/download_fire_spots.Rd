@@ -77,8 +77,8 @@ Satellite names are automatically normalized. Supported aliases:
 north_states <- c("ACRE", "AMAPA", "AMAZONAS", "PARA", "RONDONIA", "RORAIMA", "TOCANTINS")
 north_data <- download_fire_spots(
   start_date_str = "01/08/2023",
-  end_date_str   = "30/09/2023",
-  target_states  = north_states,
+  end_date_str = "30/09/2023",
+  target_states = north_states,
   deduplicate_final = TRUE
 )
 

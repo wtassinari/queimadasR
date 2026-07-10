@@ -47,13 +47,13 @@
 download_focos <- function(
   start_date,
   end_date,
-  target_states      = NULL,
-  target_satellites  = NULL,
-  deduplicate_final  = TRUE
+  target_states = NULL,
+  target_satellites = NULL,
+  deduplicate_final = TRUE
 ) {
   # Convert date formats
   start_date_str <- convert_date_format(start_date)
-  end_date_str   <- convert_date_format(end_date)
+  end_date_str <- convert_date_format(end_date)
 
   # Convert state abbreviations to full names if needed
   target_states <- convert_state_abbreviations(target_states)
@@ -62,16 +62,16 @@ download_focos <- function(
 
   # Call the main download function
   dados <- download_fire_spots(
-    start_date_str        = start_date_str,
-    end_date_str          = end_date_str,
-    region                = "Brasil",
-    target_states         = target_states,
-    target_satellites     = target_satellites,
-    timeout               = 300,
-    sleep_sec             = 1,
+    start_date_str = start_date_str,
+    end_date_str = end_date_str,
+    region = "Brasil",
+    target_states = target_states,
+    target_satellites = target_satellites,
+    timeout = 300,
+    sleep_sec = 1,
     show_satellites_when_empty = TRUE,
-    deduplicate_final     = deduplicate_final,
-    dedup_keys            = c("latitude", "longitude", "data_pas", "municipio")
+    deduplicate_final = deduplicate_final,
+    dedup_keys = c("latitude", "longitude", "data_pas", "municipio")
   )
 
   return(dados)
@@ -89,12 +89,15 @@ download_focos <- function(
 #' @keywords internal
 convert_date_format <- function(date_str) {
   # Try parsing as YYYY-MM-DD first
-  parsed_date <- tryCatch({
-    as.Date(date_str, format = "%Y-%m-%d")
-  }, error = function(e) {
-    # Try DD/MM/YYYY format
-    as.Date(date_str, format = "%d/%m/%Y")
-  })
+  parsed_date <- tryCatch(
+    {
+      as.Date(date_str, format = "%Y-%m-%d")
+    },
+    error = function(e) {
+      # Try DD/MM/YYYY format
+      as.Date(date_str, format = "%d/%m/%Y")
+    }
+  )
 
   if (is.na(parsed_date)) {
     stop("Invalid date format. Use 'YYYY-MM-DD' or 'DD/MM/YYYY'.")
@@ -115,7 +118,9 @@ convert_date_format <- function(date_str) {
 #'
 #' @keywords internal
 convert_state_abbreviations <- function(states) {
-  if (is.null(states)) return(NULL)
+  if (is.null(states)) {
+    return(NULL)
+  }
 
   # Mapping of state abbreviations to full names
   state_mapping <- c(
@@ -199,10 +204,12 @@ convert_state_abbreviations <- function(states) {
 #' @export
 processar_focos <- function(
   dados,
-  remove_duplicates    = TRUE,
+  remove_duplicates = TRUE,
   filter_by_confidence = FALSE
 ) {
   message("Processing fire spot data...")
+
+  # Avoid notes when running devtools::check
 
   if (is.null(dados) || nrow(dados) == 0) {
     message("No data to process.")
@@ -211,13 +218,13 @@ processar_focos <- function(
 
   # Ensure required columns exist
   required_cols <- c("latitude", "longitude", "data_pas")
-  missing_cols  <- setdiff(required_cols, names(dados))
+  missing_cols <- setdiff(required_cols, names(dados))
   if (length(missing_cols) > 0) {
     stop("Missing required columns: ", paste(missing_cols, collapse = ", "))
   }
 
   # Standardize data types
-  dados$latitude  <- as.numeric(dados$latitude)
+  dados$latitude <- as.numeric(dados$latitude)
   dados$longitude <- as.numeric(dados$longitude)
 
   if (!inherits(dados$data_pas, "POSIXct")) {
@@ -282,10 +289,13 @@ processar_focos <- function(
 #' @export
 mapa_focos <- function(
   dados,
-  color_by  = "frp",
-  title     = NULL,
+  color_by = "frp",
+  title = NULL,
   show_grid = TRUE
 ) {
+  # Avoid NOTEs when checking.
+  .data <- longitude <- latitude <- NULL
+
   message("Generating map...")
 
   # Verify ggplot2 is available

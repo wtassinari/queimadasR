@@ -1,7 +1,7 @@
 Package: queimadasR
 Type: Package
 Title: Download and Analysis of Wildfire Data from INPE
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(
     person("Wagner", "Tassinari",
            email = "wagner.tassinari@ufrrj.br",
@@ -38,7 +38,6 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: false
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
 Depends:
     R (>= 3.5.0)
 Imports:
@@ -48,7 +47,6 @@ Suggests:
     testthat (>= 3.0.0),
     knitr,
     rmarkdown
-VignetteBuilder: knitr
 URL: https://github.com/wtassinari/queimadasR
 BugReports: https://github.com/wtassinari/queimadasR/issues
-
+Config/roxygen2/version: 8.0.0

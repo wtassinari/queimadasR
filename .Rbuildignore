@@ -13,3 +13,7 @@
 ^\.vscode$
 ^\.idea$
 ^\.Rhistory$
+^.*\.gitkeep$
+README.html
+sticker_queimadasR.png
+
